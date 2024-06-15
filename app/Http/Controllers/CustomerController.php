@@ -6,8 +6,8 @@ use App\Models\Customer;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Requests\CustomerUpdateRequest;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CustomersExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
@@ -102,34 +102,49 @@ class CustomerController extends Controller
     }
 
     public function processTransaction(Request $request)
-    {
-        $request->validate([
-            'account_number' => 'required|string|exists:customers,account_number',
-            'amount' => 'required_without:kg|numeric|min:0',
-            'kg' => 'required_without:amount|numeric|min:0',
-        ]);
+{
+    $request->validate([
+        'account_number' => 'required|string|exists:customers,account_number',
+        'amount' => 'required_without:kg|numeric|min:0',
+        'kg' => 'required_without:amount|numeric|min:0',
+    ]);
 
-        $customer = Customer::where('account_number', $request->account_number)->firstOrFail();
-        $customer->old_balance = $customer->new_balance;
-        if ($request->has('amount')) {
-            $customer->new_balance += $request->amount;
-            $transactionType = 'credit';
-            $amount = $request->amount;
-        } elseif ($request->has('kg')) {
-            $amount = $request->kg * 80;
-            $customer->new_balance -= $amount;
-            $transactionType = 'debit';
+    $customer = Customer::where('account_number', $request->account_number)->firstOrFail();
+    $customer->old_balance = $customer->new_balance;
+
+    if ($request->has('amount')) {
+        if ($request->amount < 0) {
+            return redirect()->back()->with('error', 'Amounts below zero cannot be credited.');
         }
-        $customer->save();
-
-        Transaction::create([
-            'account_number' => $customer->account_number,
-            'amount' => $amount,
-            'transactiontype' => $transactionType,
-        ]);
-
-        return redirect()->back()->with('success', 'Transaction processed successfully.');
+        $customer->new_balance += $request->amount;
+        $transactionType = 'credit';
+        $amount = $request->amount;
+        $quantity = 0.00; // Use 0.00 as placeholder for credit transactions
+    } elseif ($request->has('kg')) {
+        $amount = $request->kg * 80;
+        if ($amount > $customer->new_balance) {
+            return redirect()->back()->with('error', 'Insufficient balance, please credit your account.');
+        }
+        $customer->new_balance -= $amount;
+        $transactionType = 'debit';
+        $quantity = $request->kg;
     }
+
+    $customer->save();
+
+    Transaction::create([
+        'account_number' => $customer->account_number,
+        'amount' => $amount,
+        'transactiontype' => $transactionType,
+        'old_balance' => $customer->old_balance,
+        'new_balance' => $customer->new_balance,
+        'quantity' => $quantity,
+    ]);
+
+    return redirect()->back()->with('success', 'Transaction processed successfully.');
+}
+
+    
 
     /**
      * Search the products based on various criteria.

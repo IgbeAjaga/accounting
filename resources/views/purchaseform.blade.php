@@ -12,6 +12,18 @@
       </a>
 </div>
 
+@if(session('success'))
+        <div class="alert alert-success mt-3">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger mt-3">
+            {{ session('error') }}
+        </div>
+    @endif
+
 <form action="{{ route('process.transaction') }}" method="post">
     @csrf
     <input type="text" name="account_number" placeholder="Account Number">

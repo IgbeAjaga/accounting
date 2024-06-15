@@ -16,11 +16,6 @@
     </div>
 
     <!-- Small Table to show aggregated data -->
-    <h2 class="card-header text-center text-primary"><strong> DETAILS OF ACCOUNT:</strong>
-    @if(request('account_number'))  {{ request('account_number') }} @endif    
-    @if(request('date_from'))  {{ request('date_from') }} @endif
-    @if(request('date_to')) to {{ request('date_to') }} @endif
-    </h2>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -34,43 +29,38 @@
                 {{ $customer->name }}
             </div>
         </div>
-       
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Phone Number:</strong> <br/>
-                    {{ $customer->phone }}
-                </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Phone Number:</strong> <br/>
+                {{ $customer->phone }}
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Old Balance (Naira):</strong> <br/>
-                    {{ $customer->old_balance }}
-                </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Old Balance (NGN):</strong> <br/>
+                {{ $customer->old_balance }}
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Current Balance (Naira):</strong> <br/>
-                    {{ $customer->new_balance }}
-                </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Available Balance (NGN):</strong> <br/>
+                {{ $customer->new_balance }}
             </div>
         </div>
     </div>
 
-    <h2 class="card-header text-center text-primary"><strong>Transactions of Account Number</strong> 
-    @if(request('account_number'))  {{ request('account_number') }} @endif
-    @if(request('amount')) drugs {{ request('amount') }} - @endif
-    @if(request('transactiontype')) {{ request('transactiontype') }} branch @endif        
-    @if(request('date_from')) from {{ request('date_from') }} @endif
-    @if(request('date_to')) to {{ request('date_to') }} @endif
-    </h2>
+    <h2 class="card-header text-center text-primary"><strong>Transaction history</strong></h2>
     
     <table class="table table-bordered table-striped mt-4">
       <thead>
         <tr>
           <th width="80px">SN</th>
           <th>Account Number</th>
+          <th>Old Balance (NGN)</th>
           <th>Amount</th>
-          <th>Transaction Type</th>          
+          <th>Transaction Type</th>
+          <th>Available Balance(NGN)</th>
+          <th>Quantity (kg)</th>          
           <th>Date</th>
         </tr>
       </thead>
@@ -79,8 +69,11 @@
           <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $transaction->account_number }}</td>
+            <td>{{ $transaction->old_balance }}</td>
             <td>{{ $transaction->amount }}</td>
-            <td>{{ $transaction->transactiontype }}</td>                        
+            <td>{{ $transaction->transactiontype }}</td> 
+            <td>{{ $transaction->new_balance }}</td>
+            <td>{{ $transaction->quantity }}</td>                        
             <td>{{ $transaction->created_at->format('Y-m-d H:i:s') }}</td>
           </tr>
         @empty

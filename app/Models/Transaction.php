@@ -13,6 +13,9 @@ class Transaction extends Model
         'account_number',
         'amount',
         'transactiontype',
+        'old_balance', // Add old_balance
+        'new_balance', // Add new_balance
+        'quantity',
     ];
 
     public function customer()

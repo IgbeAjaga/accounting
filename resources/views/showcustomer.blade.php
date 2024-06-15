@@ -43,13 +43,13 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Old Balance:</strong> <br/>
+                <strong>Old Balance(NGN):</strong> <br/>
                 {{ $customer->old_balance }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>New Balance:</strong> <br/>
+                <strong>Available Balance(NGN):</strong> <br/>
                 {{ $customer->new_balance }}
             </div>
         </div>

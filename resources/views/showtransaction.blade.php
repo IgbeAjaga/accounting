@@ -30,7 +30,23 @@
                 {{ $transaction->transactiontype }}
             </div>
         </div>       
-    </div>  
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Old Balance(NGN):</strong> <br/>
+                {{ $transaction->old_balance }}
+            </div>
+        </div>       
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Available Balance(NGN):</strong> <br/>
+                {{ $transaction->new_balance }}
+            </div>
+        </div>       
+    </div>      
   </div>
 </div>
 @endsection

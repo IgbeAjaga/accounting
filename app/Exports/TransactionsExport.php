@@ -15,7 +15,7 @@ class TransactionsExport implements FromCollection, WithHeadings, ShouldAutoSize
     public function collection()
     {
         // Return the collection of products with only the fields we need
-        return Customer::select('id', 'account_number', 'amount', 'transactiontype', 'created_at')->get();
+        return Transaction::select('id', 'account_number', 'amount', 'transactiontype', 'old_balance', 'new_balance', 'quantity', 'created_at')->get();
     }
     public function headings(): array
     {
@@ -23,7 +23,10 @@ class TransactionsExport implements FromCollection, WithHeadings, ShouldAutoSize
             'ID',
             'Account Number',
             'Amount',
-            'Transaction Type',                   
+            'Transaction Type',
+            'old Balance',
+            'Available balance',
+            'Quantity',                   
             'Date',
         ];
     }

@@ -36,16 +36,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     
     Route::get('/allcustomers', [CustomerController::class, 'index'])->name('allcustomers');
-    Route::get('/alltransactions', [TransactionController::class, 'index'])->name('alltransactions');
+    Route::get('/alltransactions', [TransactionController::class, 'index'])->name('alltransactions');   
     
     
     
 
     Route::get('/searchcustomer', [CustomerController::class, 'search'])->name('searchcustomer');
     Route::get('/searchtransaction', [TransactionController::class, 'search'])->name('searchtransaction');
-Route::get('/export', [CustomerController::class, 'export'])->name('customers.export');
-Route::get('/export', [TransactionController::class, 'export'])->name('transactions.export');
-Route::get('customers/export', [TransactionController::class, 'export'])->name('customers.export');
+    Route::get('/customers/export', [CustomerController::class, 'export'])->name('customers.export');
+    Route::get('/export', [TransactionController::class, 'export'])->name('transactions.export');
+    
+
 
 
 Route::get('/create-customer', function() {

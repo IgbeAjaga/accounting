@@ -32,6 +32,12 @@
 <div class="mb-3">
         <input type="text" name="phone" placeholder="Customer's Phone">
 </div>
+<div class="col-md-3">
+          <input type="date" name="date_from" class="form-control" placeholder="From Date">
+        </div>
+        <div class="col-md-3">
+          <input type="date" name="date_to" class="form-control" placeholder="To Date">
+        </div>
         <div class="col-md-3">
           <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search Customer</button>
         </div>
@@ -43,7 +49,7 @@
         <i class="fa fa-plus"></i> Add New Customer
       </a>   
       
-      <a class="btn btn-secondary btn-sm" href="{{ route('customers.export') }}">
+      <a class="btn btn-secondary btn-sm" href="{{ route('customers.export1') }}">
         <i class="fa fa-file-excel"></i> Export to Excel
       </a>
     </div>
@@ -56,8 +62,8 @@
           <th>Customer's Name</th>
           <th>Email</th>
           <th>Phone Number</th>
-          <th>Old Balance (Naira)</th>
-          <th>Current Balance (Naira)</th>
+          <th>Old Balance(NGN)</th>
+          <th>Current Balance(NGN)</th>
           <th>Date</th>
           <th width="250px">Actions</th>
         </tr>

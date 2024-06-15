@@ -122,7 +122,8 @@ class TransactionController extends Controller
         $customer = Customer::where('account_number', $request->account_number)->firstOrFail();
 
         // Build query for transactions
-        $query = Transaction::where('account_number', $request->account_number);
+        $query = Transaction::where('account_number', $request->account_number)
+        ->orderBy('created_at', 'desc');
 
         if ($request->filled('date_from')) {
             $query->whereDate('created_at', '>=', $request->date_from);

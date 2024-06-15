@@ -22,7 +22,13 @@
         
       <div class="mb-3">
       <input type="text" name="account_number" placeholder="Account Number"> 
-</div>   
+</div>
+<div class="col-md-3">
+          <input type="date" name="date_from" class="form-control" placeholder="From Date">
+        </div>
+        <div class="col-md-3">
+          <input type="date" name="date_to" class="form-control" placeholder="To Date">
+        </div>
     <div class="col-md-3">
           <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search Transaction</button>
         </div>
@@ -48,8 +54,11 @@
         <tr>
           <th width="80px">SN</th>
           <th>Account Number</th>
+          <th>Old Balance(NGN)</th>
           <th>Amount (Naira)</th>
-          <th>Transaction Type</th>          
+          <th>Transaction Type</th>
+          <th>Available Balance(NGN)</th>
+          <th>Quantity (kg)</th>          
           <th>Date</th>
           <th width="250px">Action</th>
         </tr>
@@ -59,8 +68,11 @@
           <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $transaction->account_number }}</td>
+            <td>{{ $transaction->old_balance }}</td>
             <td>{{ $transaction->amount }}</td>
-            <td>{{ $transaction->transactiontype }}</td>            
+            <td>{{ $transaction->transactiontype }}</td>
+            <td>{{ $transaction->new_balance }}</td>
+            <td>{{ $transaction->quantity }}</td>             
             <td>{{ $transaction->created_at->format('Y-m-d H:i:s') }}</td>
 <td>
               <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST">

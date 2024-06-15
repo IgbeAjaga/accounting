@@ -14,7 +14,7 @@
       </button>
     </div>    
         
-        <h2 class="card-header text-center text-primary"><strong>DETAILS OF:</strong> 
+        <h2 class="card-header text-center text-primary"><strong>DETAILS OF ACCOUNT</strong> 
         @if(request('account_number'))  {{ request('account_number') }} @endif
         @if(request('name')) account number {{ request('name') }} - @endif
         @if(request('email')) {{ request('email') }} name @endif
@@ -25,12 +25,13 @@
     <table class="table table-bordered table-striped mt-4">
       <thead>
         <tr>
+        <<th>SN</th>
           <<th>Account Number</th>
           <th>Customer's Name</th>
           <th>Email</th>
           <th>Phone Number</th>
-          <th>Old Balance (Naira)</th>
-          <th>Current Balance (Naira)</th>
+          <th>Old Balance(NGN)</th>
+          <th>Available Balance(NGN)</th>          
           <th>Date</th>
         </tr>
       </thead>
@@ -43,7 +44,7 @@
             <td>{{ $customer->email }}</td>
             <td>{{ $customer->phone }}</td>
             <td>{{ $customer->old_balance }}</td>
-            <td>{{ $customer->new_balance }}</td>
+            <td>{{ $customer->new_balance }}</td>            
             <td>{{ $customer->created_at->format('Y-m-d H:i:s') }}</td>
           </tr>
         @empty

@@ -12,13 +12,27 @@
       </a>
 </div>
 
+@if(session('success'))
+      <div class="alert alert-success mt-3">
+        {{ session('success') }}
+      </div>
+    @endif
+
 <form action="{{ route('create.customer') }}" method="post">
     @csrf
-    <input type="text" name="name" placeholder="Name">
-    <input type="email" name="email" placeholder="Email">
-    <input type="text" name="phone" placeholder="Phone">
+    <div class="form-group mt-3">
+    <input type="text" name="name" placeholder="Name" class="form-control" required>
+</div>
+<div class="form-group mt-3">
+    <input type="email" name="email" placeholder="Email" class="form-control" required>
+</div>
+<div class="form-group mt-3">
+    <input type="text" name="phone" placeholder="Phone" class="form-control" required>
+</div>
     <!-- Add other fields if necessary -->
+    <div class="form-group mt-3">
     <button type="submit">Create Customer</button>
+</div>
 </form>
   
   </div>
