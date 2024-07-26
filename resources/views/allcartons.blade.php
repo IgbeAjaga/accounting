@@ -40,12 +40,12 @@
       <thead>
         <tr>
           <th width="80px">SN</th>
-          <th>Old Qty (kg)</th>
-          <th>Newly Added (kg)</th>
-          <th>Balance (kg)</th>
-          <th>Old Amount (NGN)</th>
-          <th>Newly Added Amount (NGN)</th>
-          <th>Balance(NGN)</th>
+          <th>Old Balance (kg)</th>
+          <th>Recent Transaction (kg)</th>
+          <th>Available Balance (kg)</th>
+          <th>Old balance (NGN)</th>
+          <th>Recent Transaction (NGN)</th>
+          <th>Available Balance(NGN)</th>
           <th>Transaction type</th>
           <th>Date</th>
           <th width="250px">Actions</th>

@@ -137,6 +137,13 @@ class CartonQtyController extends Controller
        if ($request->has('kg')) {
             // For purchase form
             $kg = $request->kg;
+
+            // Check if there is enough carton available
+        if ($kg > $qtybal) {
+            return redirect()->back()->with('error', "Insufficient carton! There is $qtybal kg left.");
+        }
+
+
             $currentamount = $kg * 80;           
             $transactionType = 'debit';
 

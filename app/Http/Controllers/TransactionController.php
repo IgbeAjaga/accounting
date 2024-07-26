@@ -113,6 +113,11 @@ class TransactionController extends Controller
             $customer->new_balance -= $currentamount;
             $transactionType = 'debit';
 
+            // Check if there is enough carton available
+        if ($kg > $qtybal) {
+            return redirect()->back()->with('error', "Insufficient carton! There is $qtybal kg left.");
+        }
+
             // Update carton records
             $CartonQty->qtybal = $oldqty - $kg;
             $CartonQty->amountbal = $oldamount - $currentamount;
