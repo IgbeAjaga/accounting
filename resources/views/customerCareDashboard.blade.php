@@ -14,13 +14,22 @@
 
                     <div class="flex flex-wrap justify-center mt-4 gap-4">
                         <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
-                            <a href="{{ route('create') }}" class="btn btn-primary w-full bg-blue-500 text-white py-2 px-4 rounded">Add Outgoing Report</a>
+                            <a href="{{ route('create.customer') }}" class="btn btn-primary w-full bg-blue-500 text-white py-2 px-4 rounded">Add New Customer</a>
                         </div>
                         <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
-                            <a href="{{ route('addincoming') }}" class="btn btn-primary w-full bg-red-500 text-white py-2 px-4 rounded">Add Incoming Report</a>
+                            <a href="{{ route('allcustomers') }}" class="btn btn-primary w-full bg-green-500 text-white py-2 px-4 rounded">View All Customers</a>
                         </div>
                         <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
-                            <a href="{{ route('dashboard') }}" class="btn btn-primary w-full bg-orange-500 text-white py-2 px-4 rounded">Home</a>
+                            <a href="{{ route('deposit.form') }}" class="btn btn-primary w-full bg-red-500 text-white py-2 px-4 rounded">Make New Deposit</a>
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+                            <a href="{{ route('alltransactions') }}" class="btn btn-primary w-full bg-yellow-500 text-white py-2 px-4 rounded">View All Transactions</a>
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+                            <a href="{{ route('purchase.form') }}" class="btn btn-primary w-full bg-orange-500 text-white py-2 px-4 rounded">Make New Purchase</a>
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+                            <a href="{{ route('profile.index') }}" class="btn btn-primary w-full bg-purple-500 text-white py-2 px-4 rounded">View All Users</a>
                         </div>
                     </div>
                 </div>

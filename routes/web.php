@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CartonQtyController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ProfileController;
@@ -33,15 +34,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('transactions', TransactionController::class);
     Route::resource('customers', CustomerController::class);
+    Route::resource('cartons',CartonQtyController::class);
     
     
     Route::get('/allcustomers', [CustomerController::class, 'index'])->name('allcustomers');
-    Route::get('/alltransactions', [TransactionController::class, 'index'])->name('alltransactions');   
+    Route::get('/alltransactions', [TransactionController::class, 'index'])->name('alltransactions');
+    Route::get('/allcartons', [CartonQtyController::class, 'index'])->name('allcartons');   
     
     
     
 
     Route::get('/searchcustomer', [CustomerController::class, 'search'])->name('searchcustomer');
+    Route::get('/searchcarton', [CartonQtyController::class, 'search'])->name('searchcarton');
     Route::get('/searchtransaction', [TransactionController::class, 'search'])->name('searchtransaction');
     Route::get('/customers/export', [CustomerController::class, 'export'])->name('customers.export');
     Route::get('/export', [TransactionController::class, 'export'])->name('transactions.export');
@@ -64,6 +68,9 @@ Route::get('/purchase', function() {
 })->name('purchase.form');
 
 Route::post('/process-transaction', [CustomerController::class, 'processTransaction'])->name('process.transaction');
+
+Route::post('/process-transaction', [CartonQtyController::class, 'processTransaction'])->name('process.transaction');
+
 
 
 });
@@ -90,5 +97,15 @@ Route::post('/deposit', [DepositController::class, 'store']);
 Route::post('/purchase', [PurchaseController::class, 'store']);
 
 
+// Display the form to add a carton
+Route::get('/cartonqty/add', function() {
+    return view('addcarton');
+})->name('cartonqty.add.form');
+
+// Handle the form submission to add a carton
+Route::post('/cartonqty/add', [CartonQtyController::class, 'addCarton'])->name('cartonqty.add');
+
+// Handle the form submission to purchase a carton
+Route::post('/cartonqty/purchase', [TransactionController::class, 'purchaseCarton'])->name('cartonqty.purchase');
 
 require __DIR__.'/auth.php';

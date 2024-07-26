@@ -14,6 +14,9 @@
       <a class="btn btn-success btn-sm" href="{{ route('dashboard') }}">
         <i class="fa fa-home"></i> Dashboard
       </a>
+      <a class="btn btn-success btn-sm" href="{{ route('create.customer') }}">
+        <i class="fa fa-plus"></i> Add New Customer
+      </a>  
     </div>
 
     <!-- Search Form -->
@@ -42,16 +45,7 @@
           <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search Customer</button>
         </div>
       </div>
-    </form>
-
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-success btn-sm" href="{{ route('create.customer') }}">
-        <i class="fa fa-plus"></i> Add New Customer
-      </a>   
-      
-      <a class="btn btn-secondary btn-sm" href="{{ route('customers.export1') }}">
-        <i class="fa fa-file-excel"></i> Export to Excel
-      </a>
+    </form>    
     </div>
 
     <table class="table table-bordered table-striped mt-4">
@@ -101,8 +95,8 @@
           </tr>
         @endforelse
       </tbody>
-    </table>
-    {!! $customers->links() !!}   
-  </div>
+    </table>    
+      {!! $customers->links() !!}      
+  </div>   
 </div>
 @endsection

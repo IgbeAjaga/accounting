@@ -14,6 +14,17 @@
       <a class="btn btn-success btn-sm" href="{{ route('dashboard') }}">
         <i class="fa fa-home"></i> Dashboard
       </a>
+      <a class="btn btn-success btn-sm" href="{{ route('deposit.form') }}">
+        <i class="fa fa-plus"></i> Make New Deposit
+      </a>
+      
+      <a class="btn btn-success btn-sm" href="{{ route('purchase.form') }}">
+        <i class="fa fa-plus"></i> Make New Purchase
+      </a>  
+      
+      <a class="btn btn-secondary btn-sm" href="{{ route('transactions.export') }}">
+        <i class="fa fa-file-excel"></i> Export to Excel
+      </a>
 </div>
 
     <!-- Search Form -->
@@ -33,21 +44,7 @@
           <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search Transaction</button>
         </div>
       </div>
-    </form>
-
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-success btn-sm" href="{{ route('deposit.form') }}">
-        <i class="fa fa-plus"></i> Make New Deposit
-      </a>
-      
-      <a class="btn btn-success btn-sm" href="{{ route('purchase.form') }}">
-        <i class="fa fa-plus"></i> Make New Purchase
-      </a>  
-      
-      <a class="btn btn-secondary btn-sm" href="{{ route('transactions.export') }}">
-        <i class="fa fa-file-excel"></i> Export to Excel
-      </a>
-    </div>
+    </form>    
 
     <table class="table table-bordered table-striped mt-4">
       <thead>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Customer;
+use App\Models\CartonQty;
 use Illuminate\Http\Request;
 use App\Http\Requests\TransactionUpdateRequest;
 use Maatwebsite\Excel\Facades\Excel;
@@ -20,10 +21,10 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::latest()->paginate(5);
+        $transactions = Transaction::latest()->paginate(10000);
           
         return view('alltransactions', compact('transactions'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+                    ->with('i', (request()->input('page', 1) - 1) * 10000);
     }
 
     /**
@@ -79,29 +80,71 @@ class TransactionController extends Controller
         return redirect()->route('alltransactions')
                         ->with('success','Transaction deleted successfully');
     }
+   
 
-    public function processTransaction(Request $request) {
+   
+    public function processTransaction(Request $request)
+    {
+        $request->validate([
+            'account_number' => 'required|string|exists:customers,account_number',
+            'kg' => 'nullable|numeric|min:0',
+            'amount' => 'nullable|numeric|min:0',
+        ]);
+
         $customer = Customer::where('account_number', $request->account_number)->firstOrFail();
         $customer->old_balance = $customer->new_balance;
+
+        // Get the latest carton record
+        $latestCarton = CartonQty::latest()->first();
+        $oldqty = $latestCarton ? $latestCarton->qtybal : 0;
+        $oldamount = $latestCarton ? $latestCarton->amountbal : 0;
+
         if ($request->has('amount')) {
             // For deposit form
             $customer->new_balance += $request->amount;
             $transactionType = 'credit';
+
+            
+
         } elseif ($request->has('kg')) {
             // For purchase form
-            $customer->new_balance -= $request->kg * 80;
+            $kg = $request->kg;
+            $currentamount = $kg * 80;
+            $customer->new_balance -= $currentamount;
             $transactionType = 'debit';
+
+            // Update carton records
+            $CartonQty->qtybal = $oldqty - $kg;
+            $CartonQty->amountbal = $oldamount - $currentamount;
+
+        } else {
+            return redirect()->back()->with('error', 'Invalid transaction data.');
         }
+
         $customer->save();
-    
-        Transaction::create([
-            'account_number' => $customer->account_number,
-            'amount' => $request->has('amount') ? $request->amount : $request->kg * 80,
+
+        // Save the carton quantity change
+        CartonQty::create([
+            'oldqty' => $oldqty,
+            'kg' => $kg,
+            'qtybal' => $qtybal,
+            'oldamount' => $oldamount,
+            'currentamount' => $currentamount,
+            'amountbal' => $amountbal,
             'transactiontype' => $transactionType,
         ]);
-    
+
+        // Create the transaction record
+        Transaction::create([
+            'account_number' => $customer->account_number,
+            'amount' => $currentamount,
+            'transactiontype' => $transactionType,
+        ]);
+
         return redirect()->back()->with('success', 'Transaction processed successfully.');
     }
+
+
 
      /**
      * Search the products based on various criteria.
@@ -146,4 +189,7 @@ class TransactionController extends Controller
     {
         return Excel::download(new TransactionsExport, 'transactions.xlsx');
     }
+
+   
+
 }

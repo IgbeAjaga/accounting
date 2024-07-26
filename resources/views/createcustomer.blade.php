@@ -7,6 +7,7 @@
   <div class="card-body">
     
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  
       <a class="btn btn-success btn-sm" href="{{ route('dashboard') }}">
         <i class="fa fa-home"></i> Dashboard
       </a>

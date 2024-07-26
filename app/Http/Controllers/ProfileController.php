@@ -18,10 +18,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate(5);
+        $users = User::latest()->paginate(10000);
           
         return view('profile.index', compact('users'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+                    ->with('i', (request()->input('page', 1) - 1) * 10000);
     }
 
     /**
