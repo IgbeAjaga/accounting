@@ -13,14 +13,15 @@ class AdminAuth
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if(Auth()->user()->role == 'admin' || Auth()->user()->role == 'superadmin' || Auth()->user()->role == 'customercare'){ 
+        // Check if the authenticated user is an admin
+        if (Auth::check() && Auth::user()->role === 'admin') {
             return $next($request);
-        }else{
-            return redirect()->route('login')->with('error', 'You do not have permission to access this page !');
         }
-        
+
+        // If the user is not an admin, redirect to the index page
+        return redirect()->route('/')->with('error', 'You do not have permission to access this page !');
     }
 
 }

@@ -61,4 +61,36 @@ class ProfileController extends Controller
                         ->with('success','User deleted successfully');
     }
 
+   /**
+     * Approve the user's account.
+     */
+
+     public function approve($id)
+     {
+         $user = User::find($id);
+         if ($user) {
+             $user->is_approved = true;
+             $user->save();
+             return redirect()->back()->with('success', 'User approved successfully.');
+         }
+         return redirect()->back()->with('error', 'User not found.');
+     }
+ 
+     public function disapprove($id)
+     {
+         $user = User::find($id);
+         if ($user) {
+             $user->is_approved = false;
+             $user->save();
+             return redirect()->back()->with('success', 'User disapproved successfully.');
+         }
+         return redirect()->back()->with('error', 'User not found.');
+     }
+public function approveUsersView()
+{
+    $users = User::where('is_approved', false)->get();
+    return view('approve_users', compact('users'));
+}
+
+
   }

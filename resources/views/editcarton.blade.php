@@ -14,22 +14,22 @@
         @csrf
         @method('PUT')  
        
-    <input type="text" name="oldqty" placeholder="Previous quantity added in kg">
+    <input type="text" name="oldqty" placeholder=">Old Balance (kg)">
     <br>
     <br>
-    <input type="text" name="kg" placeholder="New quantity added in kg">
+    <input type="text" name="kg" placeholder="Current Transaction (kg)">
     <br>
     <br>
-    <input type="text" name="qtybal" placeholder="Balance in kg">
+    <input type="text" name="qtybal" placeholder="Available Balance (kg)">
     <br>
     <br>
-    <input type="text" name="oldamount" placeholder="Previous quantity added in NGN">
+    <input type="text" name="oldamount" placeholder="Old balance (NGN)">
     <br>
     <br>
-    <input type="text" name="currentamount" placeholder="New quantity added in NGN">
+    <input type="text" name="currentamount" placeholder="Recent Transaction (NGN)">
     <br>
     <br>
-    <input type="text" name="amountbal" placeholder="Balance in NGN">
+    <input type="text" name="amountbal" placeholder="Available Balance(NGN)">
     <br>
     <br>
     <!-- Add other fields if necessary -->

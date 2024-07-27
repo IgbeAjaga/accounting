@@ -57,7 +57,7 @@
           <th>Available Balance(NGN)</th>
           <th>Quantity (kg)</th>          
           <th>Date</th>
-          <th width="250px">Action</th>
+          <!-- <th width="250px">Action</th> -->
         </tr>
       </thead>
       <tbody>
@@ -71,6 +71,7 @@
             <td>{{ $transaction->new_balance }}</td>
             <td>{{ $transaction->quantity }}</td>             
             <td>{{ $transaction->created_at->format('Y-m-d H:i:s') }}</td>
+            <!--
 <td>
               <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST">
                 <a class="btn btn-info btn-sm" href="{{ route('transactions.show', $transaction->id) }}">
@@ -86,6 +87,7 @@
                 </button>
               </form>
             </td>
+-->
           </tr>
         @empty
           <tr>

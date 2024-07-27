@@ -48,7 +48,7 @@
           <th>Available Balance(NGN)</th>
           <th>Transaction type</th>
           <th>Date</th>
-          <th width="250px">Actions</th>
+          <!-- <th width="250px">Actions</th> -->
         </tr>
       </thead>
       <tbody>
@@ -63,6 +63,7 @@
             <td>{{ $carton->amountbal }}</td>
             <td>{{ $carton->transactiontype }}</td>
             <td>{{ $carton->created_at->format('Y-m-d H:i:s') }}</td>
+            <!--
             <td>
             <form action="{{ route('cartons.destroy', $carton->id) }}" method="POST">
                 <a class="btn btn-info btn-sm" href="{{ route('cartons.show', $carton->id) }}">
@@ -78,6 +79,7 @@
                 </button>
               </form>
             </td>
+-->
           </tr>
         @empty
           <tr>

@@ -13,12 +13,14 @@ class CustomerCareAuth
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if(Auth()->user()->role == 'customercare'){ 
+        // Check if the authenticated user is a customer care
+        if (Auth::check() && Auth::user()->role === 'customercare') {
             return $next($request);
-        }else{
-            return redirect()->route('login')->with('error', 'You do not have permission to access this page !');
         }
+
+        // If the user is not a customer care, redirect to the index page
+        return redirect()->route('/')->with('error', 'You do not have permission to access this page !');
     }
 }

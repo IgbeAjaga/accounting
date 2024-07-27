@@ -59,7 +59,7 @@
           <th>Old Balance(NGN)</th>
           <th>Current Balance(NGN)</th>
           <th>Date</th>
-          <th width="250px">Actions</th>
+          <!-- <th width="250px">Actions</th> -->
         </tr>
       </thead>
       <tbody>
@@ -73,6 +73,7 @@
             <td>{{ $customer->old_balance }}</td>
             <td>{{ $customer->new_balance }}</td>
             <td>{{ $customer->created_at->format('Y-m-d H:i:s') }}</td>
+            <!--
             <td>
               <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
                 <a class="btn btn-info btn-sm" href="{{ route('customers.show', $customer->id) }}">
@@ -88,6 +89,7 @@
                 </button>
               </form>
             </td>
+-->
           </tr>
         @empty
           <tr>
